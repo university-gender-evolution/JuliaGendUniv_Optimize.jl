@@ -4,7 +4,7 @@ CurrentModule = JuliaGendUniv_Optimize
 
 # JuliaGendUniv_Optimize
 
-Documentation for [JuliaGendUniv_Optimize](https://github.com/00krishna/JuliaGendUniv_Optimize.jl).
+Documentation for [JuliaGendUniv_Optimize](https://github.com/university-gender-evolution/JuliaGendUniv_Optimize).
 
 ```@index
 ```
