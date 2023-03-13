@@ -1,6 +1,11 @@
 using JuliaGendUniv_Optimize
 using Test
+using TestItems
 
-@testset "JuliaGendUniv_Optimize.jl" begin
-    # Write your tests here.
+
+@testitem "[JuliaGendUniv_Optimize] optimization module" begin
+    using JuliaGendUniv_Optimize, Test
+
+    @test 1 + 1 == 2
+
 end

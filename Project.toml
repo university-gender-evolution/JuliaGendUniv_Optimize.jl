@@ -3,6 +3,9 @@ uuid = "fb74a1aa-7d8f-471e-ac2a-0fc8d14e7789"
 authors = ["Krishna Bhogaonker"]
 version = "0.1.0"
 
+[deps]
+TestItems = "1c621080-faea-4a02-84b6-bbd5e436b8fe"
+
 [compat]
 julia = "1.8"
 

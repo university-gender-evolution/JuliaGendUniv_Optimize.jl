@@ -1,2 +1,10 @@
 # This file is machine-generated - editing it directly is not advised
 
+julia_version = "1.8.3"
+manifest_format = "2.0"
+project_hash = "8562b345b124c3a0c269a61bb34486ca6d4508a2"
+
+[[deps.TestItems]]
+git-tree-sha1 = "8621ba2637b49748e2dc43ba3d84340be2938022"
+uuid = "1c621080-faea-4a02-84b6-bbd5e436b8fe"
+version = "0.1.1"
