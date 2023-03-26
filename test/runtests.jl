@@ -15,6 +15,7 @@ end
 @testitem "[JuliaGendUniv_Optimize] optimization module" begin
     using JuliaGendUniv_Optimize, Test
 
+    @test run_model() == 1
     @test 1 + 1 == 2
 
 end
