@@ -5,7 +5,6 @@ using JuliaGendUniv_Types
 using DataFrames
 using DifferentialEquations
 using Optimization
-using ComponentArrays
 
 include("Genduniv_opt_model_types.jl")
 include("GendUniv_run_model.jl")
