@@ -17,5 +17,6 @@ end
 
     @test run_model() == 1
     @test 1 + 1 == 2
-
+    # t_preprocess_um_deptindex = preprocess_data("michigan1979to2009_wGender.dta", 
+    #                             165, UM(); audit_config=NoAudit());
 end
