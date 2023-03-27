@@ -12,10 +12,19 @@ using TestItems
 
 end
 
-@testitem "[JuliaGendUniv_Optimize] optimization module" begin
+@testitem "[JuliaGendUniv_Optimize] run model functions" begin
     using JuliaGendUniv_Optimize, Test
 
+    # t_preprocess_um_deptindex = preprocess_data("michigan1979to2009_wGender.dta", 
+    #                             165, UM(); audit_config=NoAudit());
     @test run_model() == 1
-    @test 1 + 1 == 2
+    @test run_model_with_bayes() == 1
+end
 
+@testitem "[JuliaGendUniv_Optimize] run model functions" begin
+    using JuliaGendUniv_Optimize, Test
+
+    @test estimate_model_with_bayes() == 1
+    @test optimize_model() == 1
+    @test 1 + 1 == 2
 end
