@@ -1,5 +1,5 @@
 
-mutable struct DDE_Initial_Params <: AbstractModelParams
+mutable struct Basic_DDE_Initial_Params <: AbstractModelParams
     rattr_f1::Float64
     rattr_f2::Float64
     rattr_f3::Float64
@@ -21,8 +21,8 @@ mutable struct DDE_Initial_Params <: AbstractModelParams
     growth_rate_linear::Float64
 end;
 
-function DDE_Initial_Params()
-    return DDE_Initial_Params(
+function Basic_DDE_Initial_Params()
+    return Basic_DDE_Initial_Params(
         0.01,
         0.001,
         0.01,
@@ -58,5 +58,23 @@ function basic_genduniv_dde!(du, u, h, p, t)
 end;
 
 
-function run_model(dept_data::UMDeptData,
-                    params::)
+function run_model(dept_data::JuliaGendUniv.UMDeptData, ::BasicDDEModel,
+                    params::Basic_DDE_Initial_Params)
+
+    tspan = dept_data._tspan
+    u0 = dept_data._u0.u0_act_bootnorm
+    full_data = dept_data.bootstrap_df[:, [:boot_norm_f1, :boot_norm_f2, :boot_norm_f3, :boot_norm_m1, :boot_norm_m2, :boot_norm_m3]]
+    full_data = transpose(Array(full_data))[:, Int(tspan[1]):Int(tspan[2])]
+    
+    #throw(ErrorException("just checking stuff"))
+
+    h(p, t) = zeros(6)
+    lags = [6.0]
+
+    genduniv_dde_prob = DDEProblem(basic_genduniv_dde!, u0, h, tspan, params,
+                                    constant_lags=lags)
+
+    alg = MethodOfSteps(Rosenbrock23())
+    sol = Array(solve(genduniv_dde_prob, alg, saveat=1.0))
+    return sol
+end;
