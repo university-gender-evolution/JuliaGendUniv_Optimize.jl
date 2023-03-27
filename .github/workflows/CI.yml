@@ -42,6 +42,7 @@ jobs:
         run: git clone git@github.com:university-gender-evolution/JuliaGendUniv.jl.git
       - name: Check file download was successful
         run: |
+          pwd
           ls -lah
       - name: Install JuliaGendUniv private repo
         run: julia --project -e 'using Pkg; Pkg.add(; url="JuliaGendUniv.jl")'
