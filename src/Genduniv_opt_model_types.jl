@@ -1,7 +1,8 @@
 # Model types
 abstract type AbstractGendUnivModel end;
-struct BaseModel <: AbstractGendUnivModel end;
-struct DdeModel <: AbstractGendUnivModel end;
+abstract type AbstractModelParams end;
+struct BasicODEModel <: AbstractGendUnivModel end;
+struct BasicDDEModel <: AbstractGendUnivModel end;
 
 
 mutable struct GUModel <: AbstractGendUnivModel
