@@ -35,9 +35,9 @@ jobs:
         with:
             ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
       - name: Clone JuliaGendUniv_Types
-        run: git clone https://github.com/university-gender-evolution/JuliaGendUniv_Types.jl.git
+        run: git clone git@github.com:university-gender-evolution/JuliaGendUniv_Types.jl.git
       - name: Clone JuliaGendUniv
-        run: git clone https://github.com/university-gender-evolution/JuliaGendUniv.jl.git
+        run: git clone git@github.com:university-gender-evolution/JuliaGendUniv.jl.git
       - name: Install private repo
         run: julia --project -e 'using Pkg; Pkg.add(; url="JuliaGendUniv_Types.jl")'
       - name: Install private repo
