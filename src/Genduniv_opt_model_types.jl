@@ -1,5 +1,8 @@
 # Model types
 abstract type AbstractGendUnivModel end;
+struct BaseModel <: AbstractGendUnivModel end;
+struct DdeModel <: AbstractGendUnivModel end;
+
 
 mutable struct GUModel <: AbstractGendUnivModel
     name::String
