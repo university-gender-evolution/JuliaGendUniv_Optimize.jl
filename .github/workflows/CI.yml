@@ -31,6 +31,17 @@ jobs:
         with:
           version: ${{ matrix.version }}
           arch: ${{ matrix.arch }}
+      - uses: webfactory/ssh-agent@v0.5.4
+        with:
+            ssh-private-key: ${{ secrets.SSH_SECRET }}
+      - name: Clone JuliaGendUniv_Types
+        run: git clone https://github.com/university-gender-evolution/JuliaGendUniv_Types.jl.git
+      - name: Clone JuliaGendUniv
+        run: git clone https://github.com/university-gender-evolution/JuliaGendUniv.jl.git
+      - name: Install private repo
+        run: julia --project -e 'using Pkg; Pkg.add(; url="JuliaGendUniv_Types.jl")'
+      - name: Install private repo
+        run: julia --project -e 'using Pkg; Pkg.add(; url="JuliaGendUniv.jl")'
       - uses: julia-actions/cache@v1
       - uses: julia-actions/julia-buildpkg@v1
       - uses: julia-actions/julia-runtest@v1
