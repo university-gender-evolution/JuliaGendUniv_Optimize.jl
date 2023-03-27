@@ -33,7 +33,9 @@ jobs:
           arch: ${{ matrix.arch }}
       - uses: webfactory/ssh-agent@v0.5.4
         with:
-            ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+            ssh-private-key: |
+                  ${{ secrets.SSH_PRIVATE_KEY }}
+                  ${{ secrets.SSH_PRIVATE_KEY_JULIAGENDUNIV}}
       - name: Clone JuliaGendUniv_Types
         run: git clone git@github.com:university-gender-evolution/JuliaGendUniv_Types.jl.git
       - name: Clone JuliaGendUniv
