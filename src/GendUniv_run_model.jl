@@ -6,10 +6,6 @@ function run_model()
 end;
 
 
-function run_model_with_bayes()
-    return 1
-end;
-
 
 function run_model(dept_data::UMDeptData, 
                     model::Function, 
