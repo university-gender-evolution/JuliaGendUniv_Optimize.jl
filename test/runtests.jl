@@ -24,5 +24,7 @@ end
 @testitem "[JuliaGendUniv_Optimize] run model functions" begin
     using JuliaGendUniv_Optimize, Test
 
+    @test estimate_model_with_bayes() == 1
+    @test optimize_model() == 1
     @test 1 + 1 == 2
 end
