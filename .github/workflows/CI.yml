@@ -44,10 +44,10 @@ jobs:
         run: |
           pwd
           ls -lah
-      - name: Install JuliaGendUniv_Types private repo
-        run: julia --project -e 'using Pkg; Pkg.add(; url="JuliaGendUniv_Types.jl")'
-      # - name: Install JuliaGendUniv private repo
-      #   run: julia --project -e 'using Pkg; Pkg.add(; path="JuliaGendUniv.jl")'
+      # - name: Install JuliaGendUniv_Types private repo
+      #   run: julia --project -e 'using Pkg; Pkg.add(; path="JuliaGendUniv_Types.jl")'
+      - name: Install JuliaGendUniv private repo
+        run: julia --project -e 'using Pkg; Pkg.add(; path="JuliaGendUniv.jl")'
       - uses: julia-actions/cache@v1
       - uses: julia-actions/julia-buildpkg@v1
       - uses: julia-actions/julia-runtest@v1
