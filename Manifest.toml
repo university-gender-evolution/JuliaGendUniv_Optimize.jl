@@ -444,9 +444,9 @@ version = "6.122.1"
 
 [[deps.DiffEqCallbacks]]
 deps = ["DataStructures", "DiffEqBase", "ForwardDiff", "LinearAlgebra", "Markdown", "NLsolve", "Parameters", "RecipesBase", "RecursiveArrayTools", "SciMLBase", "StaticArraysCore"]
-git-tree-sha1 = "b497f63a13fe37e03ed7ac72d71b72aad17b46c4"
+git-tree-sha1 = "63b6be7b396ad395825f3cc48c56b53bfaf7e69d"
 uuid = "459566f4-90b8-5000-8ac3-15dfb0a30def"
-version = "2.26.0"
+version = "2.26.1"
 
 [[deps.DiffEqFlux]]
 deps = ["Adapt", "Cassette", "ChainRulesCore", "ConsoleProgressMonitor", "DataInterpolations", "DiffEqBase", "DiffResults", "Distributions", "DistributionsAD", "Flux", "ForwardDiff", "Functors", "LinearAlgebra", "Logging", "LoggingExtras", "Lux", "NNlib", "Optim", "Optimization", "OptimizationFlux", "OptimizationOptimJL", "OptimizationPolyalgorithms", "Printf", "ProgressLogging", "Random", "RecursiveArrayTools", "Reexport", "Requires", "SciMLBase", "SciMLSensitivity", "StaticArrays", "TerminalLoggers", "Zygote", "ZygoteRules"]
@@ -645,9 +645,9 @@ uuid = "7b1f6079-737a-58dc-b8bc-7a2ca5c1b5ee"
 
 [[deps.FillArrays]]
 deps = ["LinearAlgebra", "Random", "SparseArrays", "Statistics"]
-git-tree-sha1 = "0ba171480d51567ba337e5eea4e68a8231b7a2c3"
+git-tree-sha1 = "7072f1e3e5a8be51d525d64f63d3ec1287ff2790"
 uuid = "1a297f60-69ca-5386-bcde-b61e274b549b"
-version = "0.13.10"
+version = "0.13.11"
 
 [[deps.FiniteDiff]]
 deps = ["ArrayInterface", "LinearAlgebra", "Requires", "Setfield", "SparseArrays", "StaticArrays"]
@@ -722,9 +722,9 @@ version = "0.1.3"
 
 [[deps.Functors]]
 deps = ["LinearAlgebra"]
-git-tree-sha1 = "7ed0833a55979d3d2658a60b901469748a6b9a7c"
+git-tree-sha1 = "478f8c3145bb91d82c2cf20433e8c1b30df454cc"
 uuid = "d9f16b24-f501-4c13-a1f2-28368ffc5196"
-version = "0.4.3"
+version = "0.4.4"
 
 [[deps.Future]]
 deps = ["Random"]
@@ -954,8 +954,8 @@ uuid = "aacddb02-875f-59d6-b918-886e6ef4fbf8"
 version = "2.1.91+0"
 
 [[deps.JuliaGendUniv]]
-deps = ["CSV", "Chain", "Clustering", "Combinatorics", "ComponentArrays", "DataFrames", "DataFramesMeta", "Dates", "DiffEqFlux", "DifferentialEquations", "Distances", "FreqTables", "Interpolations", "KernelDensity", "MultivariateStats", "Optimization", "PDFmerger", "Pipe", "Plots", "RCall", "StatFiles", "StatsBase", "StatsPlots", "TestItems", "UrlDownload", "Zygote"]
-git-tree-sha1 = "814dc5e67401942c6e40814a9f6a3c0d0b455fff"
+deps = ["CSV", "Chain", "Clustering", "Combinatorics", "ComponentArrays", "DataFrames", "DataFramesMeta", "Dates", "Distances", "FreqTables", "Interpolations", "KernelDensity", "MultivariateStats", "PDFmerger", "Pipe", "Plots", "RCall", "StatFiles", "StatsBase", "StatsPlots", "TestItems", "UrlDownload", "Zygote"]
+git-tree-sha1 = "09900513cf4680f7c1828623a54f6ad721949ae5"
 repo-rev = "main"
 repo-url = "https://github.com/university-gender-evolution/JuliaGendUniv.jl.git"
 uuid = "ee0bee73-3820-4a52-80b0-6c7d86c4e1a7"
@@ -963,7 +963,7 @@ version = "0.1.0"
 
 [[deps.JuliaGendUniv_Types]]
 deps = ["ComponentArrays", "DataFrames", "TestItems"]
-git-tree-sha1 = "14eb678b27ccc5dedece0cc0483fff89d7413d8d"
+git-tree-sha1 = "e8826ce62e6d164e12fde62264da0a3627107261"
 repo-rev = "main"
 repo-url = "https://github.com/university-gender-evolution/JuliaGendUniv_Types.git"
 uuid = "603251c8-9ed4-4db3-9104-3e0302b27083"
@@ -1212,9 +1212,9 @@ version = "0.12.155"
 
 [[deps.Lux]]
 deps = ["Adapt", "CUDA", "ChainRulesCore", "ComponentArrays", "FillArrays", "Flux", "Functors", "LinearAlgebra", "LuxCore", "LuxLib", "Markdown", "NNlib", "Optimisers", "Random", "Requires", "ReverseDiff", "Setfield", "SparseArrays", "Statistics", "Tracker", "TruncatedStacktraces", "Zygote", "cuDNN"]
-git-tree-sha1 = "adababc1531dcdb330640ab67785616d9cf31af2"
+git-tree-sha1 = "c018c64473af30170c554508e686e2f2efc42e68"
 uuid = "b2108857-7c20-44ae-9111-449ecde12c47"
-version = "0.4.45"
+version = "0.4.47"
 
 [[deps.LuxCore]]
 deps = ["Functors", "Random", "Setfield"]
@@ -1973,9 +1973,9 @@ uuid = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
 
 [[deps.StatsAPI]]
 deps = ["LinearAlgebra"]
-git-tree-sha1 = "f9af7f195fb13589dd2e2d57fdb401717d2eb1f6"
+git-tree-sha1 = "45a7769a04a3cf80da1c1c7c60caf932e6f4c9f7"
 uuid = "82ae8749-77ed-4fe6-ae5f-f523153014b0"
-version = "1.5.0"
+version = "1.6.0"
 
 [[deps.StatsBase]]
 deps = ["DataAPI", "DataStructures", "LinearAlgebra", "LogExpFunctions", "Missings", "Printf", "Random", "SortingAlgorithms", "SparseArrays", "Statistics", "StatsAPI"]

@@ -1,5 +1,4 @@
 using JuliaGendUniv_Optimize
-using JuliaGendUniv_Types
 using Test
 using TestItems
 
