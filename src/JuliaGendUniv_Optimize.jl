@@ -2,6 +2,7 @@ module JuliaGendUniv_Optimize
 
 
 using JuliaGendUniv_Types
+#using JuliaGendUniv
 using DataFrames
 using DifferentialEquations
 using Optimization

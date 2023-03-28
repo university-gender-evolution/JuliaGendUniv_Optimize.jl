@@ -58,7 +58,7 @@ function basic_genduniv_dde!(du, u, h, p, t)
 end;
 
 
-function run_model(dept_data::JuliaGendUniv.UMDeptData, ::BasicDDEModel,
+function run_model(dept_data::JuliaGendUniv_Types.UMDeptData, ::BasicDDEModel,
                     params::Basic_DDE_Initial_Params)
 
     tspan = dept_data._tspan
