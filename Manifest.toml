@@ -2,7 +2,7 @@
 
 julia_version = "1.8.3"
 manifest_format = "2.0"
-project_hash = "565c9b65ef55f6bd62bcfef0de87d474294ccefc"
+project_hash = "cb3a0db01154f75bf0e2ebcbe62bd5322cb7c07d"
 
 [[deps.AbstractAlgebra]]
 deps = ["GroupsCore", "InteractiveUtils", "LinearAlgebra", "MacroTools", "Markdown", "Random", "RandomExtensions", "SparseArrays", "Test"]
@@ -297,6 +297,12 @@ version = "4.6.1"
 deps = ["Artifacts", "Libdl"]
 uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
 version = "0.5.2+0"
+
+[[deps.ComponentArrays]]
+deps = ["ArrayInterface", "ChainRulesCore", "LinearAlgebra", "Requires", "StaticArrayInterface"]
+git-tree-sha1 = "2736dee49260e412a352b2d0a37fb863f9a5b559"
+uuid = "b0b7db55-cfe3-40fc-9ded-d10e2dbeff66"
+version = "0.13.8"
 
 [[deps.CompositeTypes]]
 git-tree-sha1 = "02d2316b7ffceff992f3096ae48c7829a8aa0638"
@@ -893,6 +899,14 @@ deps = ["Artifacts", "JLLWrappers", "Libdl"]
 git-tree-sha1 = "6f2675ef130a300a112286de91973805fcc5ffbc"
 uuid = "aacddb02-875f-59d6-b918-886e6ef4fbf8"
 version = "2.1.91+0"
+
+[[deps.JuliaGendUniv_Types]]
+deps = ["ComponentArrays", "DataFrames", "TestItems"]
+git-tree-sha1 = "e8826ce62e6d164e12fde62264da0a3627107261"
+repo-rev = "main"
+repo-url = "git@github.com:university-gender-evolution/JuliaGendUniv_Types.jl.git"
+uuid = "603251c8-9ed4-4db3-9104-3e0302b27083"
+version = "0.1.0"
 
 [[deps.JuliaVariables]]
 deps = ["MLStyle", "NameResolution"]
