@@ -58,8 +58,8 @@ jobs:
       - uses: webfactory/ssh-agent@v0.7.0
         with:
             ssh-private-key: |
-                  ${{ secrets.SSH_PRIVATE_KEY }}
-                  ${{ secrets.SSH_PRIVATE_KEY_JULIAGENDUNIV }}
+                  ${{ secrets.SSH_PK_JGUT }}
+                  ${{ secrets.SSH_PK_JGU }}
       - name: Install JuliaGendUniv_Types private repo
         run: julia --project -e 'using Pkg; Pkg.develop(url="git@github.com:university-gender-evolution/JuliaGendUniv_Types.jl.git")'
       - name: Install JuliaGendUniv private repo
@@ -73,7 +73,7 @@ jobs:
           version: 'tags/0.1.0'
           file: 'michigan1979to2009_wGender.dta'
           target: 'test/michigan1979to2009_wGender.dta'
-          token: ${{ secrets.SSH_PRIVATE_KEY_JULIAGENDUNIV }}
+          token: ${{ secrets.SSH_PK_JGU }}
       - uses: julia-actions/julia-runtest@v1
       - uses: julia-actions/julia-processcoverage@v1
       - uses: codecov/codecov-action@v2
