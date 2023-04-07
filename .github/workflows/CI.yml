@@ -37,11 +37,16 @@ jobs:
       - name: Install Github CLI environment variable for Julia
         run: |
           export JULIA_PKG_USE_CLI_GIT=true
-      - name: Add Github to known_hosts file
-        run: |
-          mkdir -p ~/.ssh
-          touch ~/.ssh/known_hosts
-          curl -L https://api.github.com/meta | jq -r '.ssh_keys | .[]' | sed -e 's/^/github.com /' >> ~/.ssh/known_hosts
+      # - name: Add Github to known_hosts file
+      #   run: |
+      #     mkdir -p ~/.ssh
+      #     touch ~/.ssh/known_hosts
+      #     curl -L https://api.github.com/meta | jq -r '.ssh_keys | .[]' | sed -e 's/^/github.com /' >> ~/.ssh/known_hosts
+      - uses: webfactory/ssh-agent@v0.7.0
+        with:
+            ssh-private-key: |
+                  ${{ secrets.SSH_PK_JGUT }}
+                  ${{ secrets.SSH_PK_JGU }}
       - name: Download and install R packages - readr
         run: | 
           R -e 'install.packages("readr")'
@@ -55,11 +60,6 @@ jobs:
         with:
           version: ${{ matrix.version }}
           arch: ${{ matrix.arch }}
-      - uses: webfactory/ssh-agent@v0.7.0
-        with:
-            ssh-private-key: |
-                  ${{ secrets.SSH_PK_JGUT }}
-                  ${{ secrets.SSH_PK_JGU }}
       - name: Install JuliaGendUniv_Types private repo
         run: julia --project -e 'using Pkg; Pkg.develop(url="git@github.com:university-gender-evolution/JuliaGendUniv_Types.jl.git")'
       - name: Install JuliaGendUniv private repo
