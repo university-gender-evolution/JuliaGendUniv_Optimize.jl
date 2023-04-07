@@ -75,7 +75,7 @@ jobs:
         env:
           JULIA_PKG_USE_CLI_GIT: 'true'
         with:
-          repo: 'university-gender-evolution/JuliaGendUniv.jl'
+          repo: 'university-gender-evolution/JuliaGendUniv_Optimize.jl'
           version: 'tags/v0.1.0'
           file: 'michigan1979to2009_wGender.dta'
           target: 'test/michigan1979to2009_wGender.dta'
