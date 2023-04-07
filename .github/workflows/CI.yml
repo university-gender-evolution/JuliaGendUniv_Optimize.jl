@@ -63,8 +63,12 @@ jobs:
       - uses: julia-actions/cache@v1
       - name: Install JuliaGendUniv_Types private repo
         run: julia --project -e 'using Pkg; Pkg.develop(url="git@github.com:university-gender-evolution/JuliaGendUniv_Types.jl.git")'
+        env:
+          JULIA_PKG_USE_CLI_GIT: 'true'
       - name: Install JuliaGendUniv private repo
         run: julia --project -e 'using Pkg; Pkg.develop(url="git@github.com:university-gender-evolution/JuliaGendUniv.jl.git")'
+        env:
+          JULIA_PKG_USE_CLI_GIT: 'true'
       - uses: julia-actions/julia-buildpkg@v1
       - name: Download UM datafile for testing
         uses: dsaltares/fetch-gh-release-asset@master
