@@ -58,6 +58,8 @@ jobs:
         run: | 
           R -e 'install.packages("data.table")'
       - uses: julia-actions/setup-julia@v1
+        env:
+          LD_LIBRARY_PATH: '/opt/R/4.2.3/lib/R/lib'
         with:
           version: ${{ matrix.version }}
           arch: ${{ matrix.arch }}
