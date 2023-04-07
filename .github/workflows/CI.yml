@@ -37,16 +37,16 @@ jobs:
       - name: Install Github CLI environment variable for Julia
         run: |
           export JULIA_PKG_USE_CLI_GIT=true
-      # - name: Add Github to known_hosts file
-      #   run: |
-      #     mkdir -p ~/.ssh
-      #     touch ~/.ssh/known_hosts
-      #     curl -L https://api.github.com/meta | jq -r '.ssh_keys | .[]' | sed -e 's/^/github.com /' >> ~/.ssh/known_hosts
+      - name: Add Github to known_hosts file
+        run: |
+          mkdir -p ~/.ssh
+          touch ~/.ssh/known_hosts
+          curl -L https://api.github.com/meta | jq -r '.ssh_keys | .[]' | sed -e 's/^/github.com /' >> ~/.ssh/known_hosts
       - uses: webfactory/ssh-agent@v0.7.0
         with:
             ssh-private-key: |
-                  ${{ secrets.SSH_PK_JGUT }}
-                  ${{ secrets.SSH_PK_JGU }}
+                  ${{ secrets.SSH_PK_JGUT_OPTIMIZE }}
+                  ${{ secrets.SSH_PK_JGU_OPTIMIZE }}
       - name: Download and install R packages - readr
         run: | 
           R -e 'install.packages("readr")'
@@ -73,7 +73,7 @@ jobs:
           version: 'tags/0.1.0'
           file: 'michigan1979to2009_wGender.dta'
           target: 'test/michigan1979to2009_wGender.dta'
-          token: ${{ secrets.SSH_PK_JGU }}
+          token: ${{ secrets.SSH_PK_JGU_OPTIMIZE }}
       - uses: julia-actions/julia-runtest@v1
       - uses: julia-actions/julia-processcoverage@v1
       - uses: codecov/codecov-action@v2
