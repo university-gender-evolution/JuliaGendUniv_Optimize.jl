@@ -15,13 +15,16 @@ end
 @testitem "[JuliaGendUniv_Optimize] optimization module" begin
     using Test
 
-    @test BasicODEModel() isa JuliaGendUniv_Optimize.AbstractGendUnivModel
-    @test BasicDDEModel() isa JuliaGendUniv_Optimize.AbstractGendUnivModel
+    @test JuliaGendUniv_Optimize.BasicODEModel() isa JuliaGendUniv_Optimize.AbstractGendUnivModel
+    @test JuliaGendUniv_Optimize.BasicDDEModel() isa JuliaGendUniv_Optimize.AbstractGendUnivModel
 
 end
 
 @testitem "[JuliaGendUniv_Optimize] Run model functions" begin
-    using JuliaGendUniv, Test
+    using JuliaGendUniv, JuliaGendUniv_Types, Test
+    
+    cd(@__DIR__)
+    @show pwd()
 
     t_preprocess_um_deptindex = preprocess_data("michigan1979to2009_wGender.dta", 
                                 165, UM(); audit_config=NoAudit());

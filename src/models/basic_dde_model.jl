@@ -78,3 +78,116 @@ function run_model(dept_data::JuliaGendUniv_Types.UMDeptData, ::BasicDDEModel,
     sol = Array(solve(genduniv_dde_prob, alg, saveat=1.0))
     return sol
 end;
+
+
+function _optimization_dde(umdata::JuliaGendUniv_Types.UMDeptData, ::NoAudit)
+
+    tspan = umdata._tspan
+    u0 = umdata._u0.u0_act_bootnorm
+    initial_params = umdata._initial_params_dde
+    full_data = umdata.bootstrap_df[:, [:boot_norm_f1, :boot_norm_f2, :boot_norm_f3, :boot_norm_m1, :boot_norm_m2, :boot_norm_m3]]
+    full_data = transpose(Array(full_data))[:, Int(tspan[1]):Int(tspan[2])]
+    
+    #throw(ErrorException("just checking stuff"))
+
+    h(p, t) = zeros(6)
+    lags = [6.0]
+
+    genduniv_dde_prob = DDEProblem(__genduniv_dde!,
+    u0,
+    h,
+    tspan,
+    umdata._initial_params_dde,
+    constant_lags=lags)
+
+    function __loss_dde(p)
+
+        alg = MethodOfSteps(Rosenbrock23())
+        genduniv_dde_prob = remake(genduniv_dde_prob, p=p)
+        sol = Array(solve(genduniv_dde_prob, alg, saveat=1.0))
+        loss = sum(abs2, full_data .- sol)
+        return loss, sol
+    end
+    
+    adtype = Optimization.AutoForwardDiff()
+    optf = Optimization.OptimizationFunction((p,x) -> __loss_dde(p), adtype)
+    optprob = Optimization.OptimizationProblem(optf, initial_params)
+
+    res_opt_dde = Optimization.solve(optprob, 
+                                    ADAM(0.01),
+                                    maxiters=150)
+
+    optprob2 = remake(optprob, u0 = res_opt_dde.u)
+
+    res_opt_dde = Optimization.solve(optprob2, 
+                                    BFGS(initial_stepnorm=0.01),
+                                    allow_f_increases=true, 
+                                    maxiters=200)
+
+    umdata._final_params_dde = res_opt_dde.u
+
+    genduniv_dde_prob = remake(genduniv_dde_prob, p = res_opt_dde.u)
+    sol = transpose(Array(solve(genduniv_dde_prob, MethodOfSteps(Rosenbrock23()), saveat=1.0)))
+    temp_df = DataFrame(sol, umdata._optimization_cols)
+    temp_df[!, :year] .= 0
+    temp_df.year .= sort(umdata.processed_data.year[Int(tspan[1]):Int(tspan[2])])
+
+    umdata.optimization_df = temp_df
+end;
+
+function _optimization_dde(umdata::JuliaGendUniv_Types.UMDeptData, ::DataAudit)
+
+    tspan = umdata._tspan
+    u0 = umdata._u0.u0_act_bootnorm
+    initial_params = umdata._initial_params_dde
+    full_data = umdata.bootstrap_df[:, [:boot_norm_f1, :boot_norm_f2, :boot_norm_f3, :boot_norm_m1, :boot_norm_m2, :boot_norm_m3]]
+    full_data = transpose(Array(full_data))[:, Int(tspan[1]):Int(tspan[2])]
+
+    h(p, t) = zeros(6)
+    lags = [6.0]
+
+    genduniv_dde_prob = DDEProblem(__genduniv_dde!,
+    u0,
+    h,
+    tspan,
+    umdata._initial_params_dde,
+    constant_lags=lags)
+
+
+    function __loss_dde(p)
+
+        alg = MethodOfSteps(Rosenbrock23())
+        genduniv_dde_prob = remake(genduniv_dde_prob, p=p)
+        sol = Array(solve(genduniv_dde_prob, alg, saveat=1.0))
+        loss = sum(abs2, full_data .- sol)
+        return loss, sol
+    end
+
+    adtype = Optimization.AutoForwardDiff()
+    optf = Optimization.OptimizationFunction((p,x) -> __loss_dde(p), adtype)
+    optprob = Optimization.OptimizationProblem(optf, initial_params)
+
+
+    res_opt_dde = Optimization.solve(optprob, 
+                                    ADAM(0.01),
+                                    #callback=__callback_plot_fulldata, 
+                                    maxiters=200)
+
+    optprob2 = remake(optprob, u0 = res_opt_dde.u)
+
+    res_opt_dde = Optimization.solve(optprob2, 
+                                    BFGS(initial_stepnorm=0.01),
+                                    #callback = __callback_plot_fulldata,
+                                    allow_f_increases=true, 
+                                    maxiters=200)
+
+    umdata._final_params_dde = res_opt_dde.u
+
+    genduniv_dde_prob = remake(genduniv_dde_prob, p = res_opt_dde.u)
+    sol = transpose(Array(solve(genduniv_dde_prob, MethodOfSteps(Rosenbrock23()), saveat=1.0)))
+    temp_df = DataFrame(sol, umdata._optimization_cols)
+    temp_df[!, :year] .= 0
+    temp_df.year .= sort(umdata.processed_data.year[Int(tspan[1]):Int(tspan[2])])
+
+    umdata.optimization_df = temp_df
+end;
