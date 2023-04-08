@@ -40,10 +40,6 @@ jobs:
         run: |
           echo "${{ env.LD_LIBRARY_PATH }}"
           echo "${{ env.JULIA_PKG_USE_CLI_GIT }}"
-      - name: Check file download was successful
-        run: |
-          cd ${{ env.LD_LIBRARY_PATH}}
-          ls -lah
       - name: Add Github to known_hosts file
         run: |
           mkdir -p ~/.ssh
@@ -57,6 +53,12 @@ jobs:
       - name: Download and install R packages - readr
         run: | 
           R -e 'install.packages("readr")'
+      - name: DEBUG check R executable is in the right place.
+        run: |
+          cd /
+          locate libR.so
+          # cd ${{ env.LD_LIBRARY_PATH}}
+          # ls -lah
       - name: Download and install R packages - forecast
         run: | 
           R -e 'install.packages("forecast")'
