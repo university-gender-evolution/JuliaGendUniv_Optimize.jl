@@ -55,8 +55,8 @@ jobs:
           R -e 'install.packages("readr")'
       - name: DEBUG check R executable is in the right place.
         run: |
-          cd /
-          locate libR.so
+          printenv 
+          find /opt/R -iname libR.so
           # cd ${{ env.LD_LIBRARY_PATH}}
           # ls -lah
       - name: Download and install R packages - forecast
