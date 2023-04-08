@@ -35,7 +35,7 @@ jobs:
         run: |
           sudo apt-get install -y curl python3-pycurl libcurl4-openssl-dev
       - name: Install Github CLI environment variable for Julia
-        run: echo "export JULIA_PKG_USE_CLI_GIT=true" >> $GITHUB_ENV
+        run: echo "JULIA_PKG_USE_CLI_GIT=true" >> $GITHUB_ENV
       - name: Check environment variables
         run: |
           echo "${{ env.LD_LIBRARY_PATH }}"
@@ -55,9 +55,8 @@ jobs:
           R -e 'install.packages("readr")'
       - name: DEBUG check R executable is in the right place.
         run: |
-          printenv 
           find /opt/R -iname libR.so
-          # cd ${{ env.LD_LIBRARY_PATH}}
+          echo ${{ env.LD_LIBRARY_PATH}}
           # ls -lah
       - name: Download and install R packages - forecast
         run: | 
