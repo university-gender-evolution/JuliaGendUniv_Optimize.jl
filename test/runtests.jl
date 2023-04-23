@@ -15,8 +15,8 @@ end
 @testitem "[JuliaGendUniv_Optimize] optimization module" begin
     using Test
 
-    @test JuliaGendUniv_Optimize.BasicODEModel() isa JuliaGendUniv_Optimize.AbstractGendUnivModel
-    @test JuliaGendUniv_Optimize.BasicDDEModel() isa JuliaGendUniv_Optimize.AbstractGendUnivModel
+    @test BasicODEModel() isa JuliaGendUniv_Optimize.AbstractGendUnivModel
+    @test BasicDDEModel() isa JuliaGendUniv_Optimize.AbstractGendUnivModel
 
 end
 
@@ -26,9 +26,10 @@ end
     cd(@__DIR__)
     @show pwd()
 
-    t_preprocess_um_deptindex = preprocess_data("michigan1979to2009_wGender.dta", 
+    t_preprocess = preprocess_data("michigan1979to2009_wGender.dta", 
                                 165, UM(); audit_config=NoAudit());
-    
+    tdata = t_preprocess.dept_data_vector[1]
+    @test size(run_model(tdata, BasicDDEModel(), JuliaGendUniv_Optimize.Basic_DDE_Initial_Params())) == (6, 31)
     @test run_model() == 1
 end
 
