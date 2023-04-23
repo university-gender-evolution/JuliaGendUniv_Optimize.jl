@@ -31,7 +31,7 @@ end
                                 165, UM(); audit_config=NoAudit());
     tdata = t_preprocess.dept_data_vector[1]
     @test size(run_model(tdata, BasicDDEModel(), JuliaGendUniv_Optimize.Basic_DDE_Initial_Params)) == (6, 31)
-    @test run_model() == 1
+    @test size(optimize_model(tdata, BasicDDEModel(), JuliaGendUniv_Optimize.Basic_DDE_Initial_Params, NoAudit())) == (31,7)
 
 
 end
