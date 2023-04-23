@@ -1,49 +1,24 @@
 
-mutable struct Basic_DDE_Initial_Params <: AbstractModelParams
-    rattr_f1::Float64
-    rattr_f2::Float64
-    rattr_f3::Float64
-    rattr_m1::Float64
-    rattr_m2::Float64
-    rattr_m3::Float64
-    rhire_f1::Float64
-    rhire_f2::Float64
-    rhire_f3::Float64
-    rhire_m1::Float64
-    rhire_m2::Float64
-    rhire_m3::Float64
-    rprom_f1::Float64
-    rprom_f2::Float64
-    rprom_f3::Float64
-    rprom_m1::Float64
-    rprom_m2::Float64
-    rprom_m3::Float64
-    growth_rate_linear::Float64
-end;
-
-function Basic_DDE_Initial_Params()
-    return Basic_DDE_Initial_Params(
-        0.01,
-        0.001,
-        0.01,
-        0.01,
-        0.01,
-        0.01,
-        0.01,
-        0.01,
-        0.001,
-        0.01,
-        0.01,
-        0.01,
-        0.01,
-        0.01,
-        0.00,
-        0.01,
-        0.01,
-        0.00,
-        0.01
-    )
-end
+Basic_DDE_Initial_Params = ComponentArray(
+    rattr_f1=0.01,
+    rattr_f2=0.001,
+    rattr_f3=0.01,
+    rattr_m1=0.01,
+    rattr_m2=0.01,
+    rattr_m3=0.01,
+    rhire_f1=0.01,
+    rhire_f2=0.01,
+    rhire_f3=0.001,
+    rhire_m1=0.01,
+    rhire_m2=0.01,
+    rhire_m3=0.01,
+    rprom_f1=0.01,
+    rprom_f2=0.01,
+    rprom_f3=0.00,
+    rprom_m1=0.01,
+    rprom_m2=0.01,
+    rprom_m3=0.00,
+    growth_rate_linear=0.01)
 
 
 function basic_genduniv_dde!(du, u, h, p, t)
@@ -59,7 +34,7 @@ end;
 
 
 function run_model(dept_data::JuliaGendUniv_Types.UMDeptData, ::BasicDDEModel,
-                    params::Basic_DDE_Initial_Params)
+                    params::ComponentArray)
 
     tspan = dept_data._tspan
     u0 = dept_data._u0.u0_act_bootnorm
@@ -81,7 +56,7 @@ end;
 
 
 function optimize_model(dept_data::JuliaGendUniv_Types.UMDeptData, 
-                        ::BasicDDEModel, initial_params::AbstractModelParams,
+                        ::BasicDDEModel, initial_params::ComponentArray,
                         ::NoAudit)
 
     tspan = dept_data._tspan
@@ -126,8 +101,9 @@ function optimize_model(dept_data::JuliaGendUniv_Types.UMDeptData,
     optprob2 = remake(optprob, u0 = res_opt_dde.u)
 
     res_opt_dde = Optimization.solve(optprob2,
-                                    Opt(:LD_LBFGS, 2),
-                                    #BFGS(initial_stepnorm=0.01),
+                                    #NLopt.LD_LBFGS(initial_step=0.01),
+                                    #Opt(:LD_LBFGS, 19),
+                                    BFGS(initial_stepnorm=0.01),
                                     allow_f_increases=true, 
                                     maxiters=200)
 

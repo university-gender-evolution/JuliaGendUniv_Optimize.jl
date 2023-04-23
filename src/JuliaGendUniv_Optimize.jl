@@ -8,8 +8,10 @@ using DifferentialEquations
 using Optimization
 using OptimizationOptimisers
 using OptimizationNLopt
+using OptimizationOptimJL
 using Zygote
 using ForwardDiff
+using ComponentArrays
 
 include("Genduniv_opt_model_types.jl")
 include("GendUniv_run_model.jl")
