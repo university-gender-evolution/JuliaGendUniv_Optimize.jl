@@ -61,16 +61,14 @@ function optimize_model(dept_data::JuliaGendUniv_Types.UMDeptData,
 
     tspan = dept_data._tspan
     u0 = dept_data._u0.u0_act_bootnorm
-    full_data = dept_data.bootstrap_df[:, [:boot_norm_f1, 
-                                            :boot_norm_f2, 
-                                            :boot_norm_f3, 
-                                            :boot_norm_m1, 
-                                            :boot_norm_m2, 
-                                            :boot_norm_m3]]
+    full_data = dept_data.bootstrap_df[:, [:spline_norm_f1, 
+                                            :spline_norm_f2, 
+                                            :spline_norm_f3, 
+                                            :spline_norm_m1, 
+                                            :spline_norm_m2, 
+                                            :spline_norm_m3]]
     full_data = transpose(Array(full_data))[:, Int(tspan[1]):Int(tspan[2])]
     
-    #throw(ErrorException("just checking stuff"))
-
     h(p, t) = zeros(6)
     lags = [6.0]
 
@@ -100,12 +98,12 @@ function optimize_model(dept_data::JuliaGendUniv_Types.UMDeptData,
 
     optprob2 = remake(optprob, u0 = res_opt_dde.u)
 
-    res_opt_dde = Optimization.solve(optprob2,
-                                    #NLopt.LD_LBFGS(initial_step=0.01),
-                                    #Opt(:LD_LBFGS, 19),
-                                    BFGS(initial_stepnorm=0.01),
-                                    allow_f_increases=true, 
-                                    maxiters=200)
+    # res_opt_dde = Optimization.solve(optprob2,
+    #                                 #NLopt.LD_LBFGS(initial_step=0.01),
+    #                                 #Opt(:LD_LBFGS, 19),
+    #                                 BFGS(initial_stepnorm=0.01),
+    #                                 allow_f_increases=true, 
+    #                                 maxiters=200)
 
     dept_data._final_params_dde = res_opt_dde.u
 
