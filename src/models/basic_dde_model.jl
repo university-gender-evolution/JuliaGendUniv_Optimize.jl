@@ -98,20 +98,20 @@ function optimize_model(dept_data::JuliaGendUniv_Types.UMDeptData,
                                     OptimizationOptimisers.Adam(0.01),
                                     maxiters=150)
 
-    optprob2 = remake(optprob, u0 = res_opt_dde.u)
+    # optprob2 = remake(optprob, u0 = res_opt_dde.u)
 
-    res_opt_dde = Optimization.solve(optprob2,
-                                    #NLopt.LD_LBFGS(initial_step=0.01),
-                                    #Opt(:LD_LBFGS, 19),
-                                    BFGS(initial_stepnorm=0.01),
-                                    allow_f_increases=true, 
-                                    maxiters=200)
+    # res_opt_dde = Optimization.solve(optprob2,
+    #                                 #NLopt.LD_LBFGS(initial_step=0.01),
+    #                                 #Opt(:LD_LBFGS, 19),
+    #                                 BFGS(initial_stepnorm=0.01),
+    #                                 allow_f_increases=true, 
+    #                                 maxiters=200)
 
     dept_data._final_params_dde = res_opt_dde.u
 
     genduniv_dde_prob = remake(genduniv_dde_prob, p = res_opt_dde.u)
     sol = transpose(Array(solve(genduniv_dde_prob, MethodOfSteps(Rosenbrock23()), saveat=1.0)))
-    temp_df = DataFrame(sol, dept_data._optimization_cols)
+    temp_df = DataFrame(sol, dept_data._optimization_cols[1:6])
     temp_df[!, :year] .= 0
     temp_df.year .= sort(dept_data.processed_data.year[Int(tspan[1]):Int(tspan[2])])
 
